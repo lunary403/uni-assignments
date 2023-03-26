@@ -1,0 +1,108 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+from sklearn import metrics
+import datetime
+
+data = pd.read_csv('SuperMarketSales.csv')
+
+
+X = data['Store']
+Y = data['Weekly_Sales']
+
+cls = linear_model.LinearRegression()
+X=np.expand_dims(X, axis=1)
+Y=np.expand_dims(Y, axis=1)
+cls.fit(X,Y) #Fit method is used for fitting your training data into the model
+prediction= cls.predict(X)
+
+plt.scatter(X, Y)
+plt.xlabel('Store', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.plot(X, prediction, color='red', linewidth = 3)
+plt.show()
+
+# print('Co-efficient of linear regression',cls.coef_)
+# print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error of store', metrics.mean_squared_error(Y, prediction))
+
+X2 = data['Temperature']
+Y2 = data['Weekly_Sales']
+
+cls = linear_model.LinearRegression()
+X2=np.expand_dims(X2, axis=1)
+Y2=np.expand_dims(Y2, axis=1)
+cls.fit(X2,Y2) #Fit method is used for fitting your training data into the model
+prediction= cls.predict(X2)
+
+plt.scatter(X2, Y2)
+plt.xlabel('Temperature', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.plot(X2, prediction, color='red', linewidth = 3)
+plt.show()
+
+# print('Co-efficient of linear regression',cls.coef_)
+# print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error Of Temperature ', metrics.mean_squared_error(Y2, prediction))
+
+X3 = data['Fuel_Price']
+Y3 = data['Weekly_Sales']
+
+cls = linear_model.LinearRegression()
+X3=np.expand_dims(X3, axis=1)
+Y3=np.expand_dims(Y3, axis=1)
+cls.fit(X3,Y3) #Fit method is used for fitting your training data into the model
+prediction= cls.predict(X3)
+
+plt.scatter(X3, Y3)
+plt.xlabel('Fuel_Price', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.plot(X3, prediction, color='red', linewidth = 3)
+plt.show()
+
+# print('Co-efficient of linear regression',cls.coef_)
+# print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error Of Fuel_Price', metrics.mean_squared_error(Y3, prediction))
+
+X4 = data['CPI']
+Y4 = data['Weekly_Sales']
+
+cls = linear_model.LinearRegression()
+X4=np.expand_dims(X4, axis=1)
+Y4=np.expand_dims(Y4, axis=1)
+cls.fit(X4,Y4) #Fit method is used for fitting your training data into the model
+prediction= cls.predict(X4)
+
+plt.scatter(X4, Y4)
+plt.xlabel('CPI', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.plot(X4, prediction, color='red', linewidth = 3)
+plt.show()
+
+# print('Co-efficient of linear regression',cls.coef_)
+# print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error Of CPI', metrics.mean_squared_error(Y4, prediction))
+
+df = pd.DataFrame(data)
+df['Month'] = pd.DatetimeIndex(df['Date']).month
+df.head()
+
+X5 =df['Month'].astype(int)
+Y5 = data['Weekly_Sales']
+
+cls = linear_model.LinearRegression()
+X5=np.expand_dims(X5, axis=1)
+Y5=np.expand_dims(Y5, axis=1)
+cls.fit(X4,Y4) #Fit method is used for fitting your training data into the model
+prediction= cls.predict(X5)
+
+plt.scatter(X5, Y5)
+plt.xlabel('Month', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.plot(X4, prediction, color='red', linewidth = 3)
+plt.show()
+
+# print('Co-efficient of linear regression',cls.coef_)
+# print('Intercept of linear regression model',cls.intercept_)
+print('Mean Square Error Of Month', metrics.mean_squared_error(Y5, prediction))
